@@ -4,7 +4,7 @@
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
-<hibernate-configuration xmlns="http://www.hibernate.org/xsd/hibernate-configuration">
+<hibernate-configuration>
     <session-factory>
 
         <property name="connection.url">jdbc:postgresql://localhost/skypro</property> <!-- BD Name -->

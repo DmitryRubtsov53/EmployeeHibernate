@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.model.City;
 import org.example.model.Employee;
 import org.example.service.EmployeeDAO;
 import org.example.service.EmployeeDAOImpl;
@@ -37,5 +36,7 @@ public class Application {
             for (Employee el : employeeList) {
                 System.out.println(el);
             }
+
+
     }
 }
