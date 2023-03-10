@@ -12,6 +12,30 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) throws SQLException {
 
+            List<Employee> employeeList;
+            EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
+            Employee Nikolay = new Employee("Nikolay","Orlov","male",27,5);
+            employeeDAO.createEmployee(Nikolay);
+
+            System.out.println("----------------------------------------------------------");
+            System.out.println(employeeDAO.readById(5));
+
+            System.out.println("----------------------------------------------------------");
+            employeeList = employeeDAO.readAllEmployee();
+            for (Employee el : employeeList) {
+                    System.out.println(el);
+            }
+            System.out.println("----------------------------------------------------------");
+            Nikolay.setFirstName("Sokolov");
+            employeeDAO.updateEmployee(Nikolay);
+            System.out.println(employeeDAO.readById(12));
+
+            System.out.println("----------------------------------------------------------");
+            employeeDAO.deleteEmployee(Nikolay);
+            employeeList = employeeDAO.readAllEmployee();
+            for (Employee el : employeeList) {
+                System.out.println(el);
+            }
     }
 }
