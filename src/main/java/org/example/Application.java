@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.City;
 import org.example.model.Employee;
 import org.example.service.EmployeeDAO;
 import org.example.service.EmployeeDAOImpl;
@@ -14,7 +15,7 @@ public class Application {
             List<Employee> employeeList;
             EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-            Employee Nikolay = new Employee("Nikolay","Orlov","male",27,5);
+            Employee Nikolay = new Employee("Nikolay","Orlov","male",27,new City(5,"Ekat"));
             employeeDAO.createEmployee(Nikolay);
 
             System.out.println("----------------------------------------------------------");
