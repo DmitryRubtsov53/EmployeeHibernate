@@ -10,7 +10,7 @@ import java.util.List;
 public class CityDAOImpl implements CityDAO{
     @Override
     public void createCity(City city) {
-        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()){
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.save(city);
             transaction.commit();
@@ -19,8 +19,13 @@ public class CityDAOImpl implements CityDAO{
     }
 
     @Override
-    public City readById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(City.class,id);
+    public City readById(Integer cityId) {
+        // первоначальная редакция не позволяет использовать метод в нутри метода удаления города
+        // (сессия остается открытой + сессия метода удаления --> ОШИБКА:  Illegal attempt to associate a collection with two open sessions.)
+        //return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(City.class,cityId);
+        try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()){
+            return session.get(City.class, cityId);
+        }
     }
 
     @Override

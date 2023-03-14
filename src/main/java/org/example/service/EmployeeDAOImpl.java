@@ -15,13 +15,15 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 Transaction transaction = session.beginTransaction();
                 session.save(employee);
                 transaction.commit();
-                session.close(); //
+                session.close();
             }
         }
 
     @Override
     public Employee readById(int id) {
-          return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employee.class, id);
+           try(Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
+               return  session.get(Employee.class, id);
+           }
     }
 
     @Override
@@ -39,7 +41,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 Transaction transaction = session.beginTransaction();
                 session.update(employee);
                 transaction.commit();
-                session.close(); //
+                session.close();
             }
     }
 
@@ -49,7 +51,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 Transaction transaction = session.beginTransaction();
                 session.delete(employee);
                 transaction.commit();
-                session.close(); //
+                session.close();
         }
     }
 

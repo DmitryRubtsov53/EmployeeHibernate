@@ -17,12 +17,9 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private int age;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = City.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private City city;
-//    @Column(name = "city_id")
-//    private int city;
-
     public Employee() {
     }
     public Employee(String firstName, String lastName, String gender, int age) {
@@ -98,10 +95,12 @@ public class Employee {
     @Override
     public String toString() {
         return  "id: " + id +
-                ", " + firstName + '\'' +
-                " " + lastName + '\'' +
-                ", sex: " + gender + '\'' +
+                ", " + firstName +
+                " " + lastName +
+                ", sex: " + gender +
                 ", age: " + age +
-                ", city: " + city;
+                ", " + city;
     }
 }
+
+//(cascade = CascadeType.ALL) // @JoinColumn(name = "city_id")

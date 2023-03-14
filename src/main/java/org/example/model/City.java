@@ -1,6 +1,7 @@
 package org.example.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,28 +10,28 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "city_id",nullable = false)
-    private int cityId;
+    private Integer cityId;
     @Column(name = "city_name")
     private String cityName;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employeeList = new ArrayList<>();
 
     public City() {
     }
     public City(String cityName) {
         this.cityName = cityName;
     }
-    public City(int cityId, String cityName) {
+    public City(Integer cityId, String cityName) {
         this.cityId = cityId;
         this.cityName = cityName;
     }
 
-    public int getCityId() {
+    public Integer getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Integer cityId) {
         this.cityId = cityId;
     }
 
@@ -42,11 +43,16 @@ public class City {
         this.cityName = cityName;
     }
 
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
+    }
+
     @Override
     public String toString() {
-        return "City{" +
-                "city_id=" + cityId +
-                ", city_name='" + cityName + '\'' +
-                '}';
+        return   cityName + " (id " + cityId + ")";
     }
 }

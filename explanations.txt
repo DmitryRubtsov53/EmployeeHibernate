@@ -1,0 +1,30 @@
+ВАЖНО!!!
+-------------
+    Несмотря на то, что в классах сущностей были сделаны все настройки полей с помощью
+аннотаций, метод удаления города (с одновременным удалением с ним зависимых работников)
+не работал.
+
+    Я применял 2 варианта:
+
+1) cityDAO.deleteCity(имя города); - ОШИБКА: UPDATE или DELETE в таблице "city" нарушает
+ограничение внешнего ключа "fk289qfli0oe8ae3qcuafi4q3tf" таблицы "employee"
+Подробности: На ключ (city_id)=(1...7) всё ещё есть ссылки в таблице "employee".
+
+2) cityDAO.deleteCity(cityDAO.readById(1));
+- ОШИБКА:  Illegal attempt to associate a collection with two open sessions.
+        Т.е. незаконная попытка связать коллекцию с двумя открытыми сеансами.
+---------------------------------------
+Проблема была решена следующим способом:
+
+Нужно было настроить каскадность в самой БД!!! А нам об этом никто не сказал!
+На city_id в таблице employee БД нужно было переписать CONSTRAINT в 2 запроса SQL:
+
+1) ALTER TABLE employee DROP CONSTRAINT <имя foreng_key из ошибки>;
+
+2) ALTER TABLE employee
+ADD CONSTRAINT any_name
+FOREIGN KEY (city_id)
+REFERENCES city(city_id)
+ON DELETE CASCADE;
+
+P.S.  <имя foreng_key из ошибки> - это fk289qfli0oe8ae3qcuafi4q3tf из текста выше.

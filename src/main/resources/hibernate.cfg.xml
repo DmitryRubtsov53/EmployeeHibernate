@@ -7,7 +7,7 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="connection.url">jdbc:postgresql://localhost/skypro</property> <!-- BD Name -->
+        <property name="connection.url">jdbc:postgresql://localhost/firma</property> <!-- BD Name -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
         <property name="connection.password">1</property> <!-- DB Password -->
