@@ -6,5 +6,12 @@ import java.util.List;
 
 public interface EmployeeDAO {
     // Добавление объекта
+    void createEmployee(Employee employee);
+    // Получение объекта по id
+    Employee readById(int id);
 
+    List<Employee> readAllEmployee();
+
+    void updateEmployee(Employee employee);
+    void deleteEmployee(Employee employee);
 }
